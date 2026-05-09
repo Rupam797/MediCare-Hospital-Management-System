@@ -12,12 +12,12 @@ public class Reception extends JFrame {
     Reception() {
         UITheme.installTheme();
 
-        // â”€â”€â”€ Main layout â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main layout ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(UITheme.BG_PRIMARY);
         setContentPane(mainPanel);
 
-        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• LEFT SIDEBAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        // ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â LEFT SIDEBAR ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â
         JPanel sidebar = new JPanel();
         sidebar.setBackground(UITheme.BG_SECONDARY);
         sidebar.setPreferredSize(new Dimension(250, 0));
@@ -33,13 +33,18 @@ public class Reception extends JFrame {
         logoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         try {
-            ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/logo1.png"));
-            Image image = i1.getImage().getScaledInstance(45, 40, Image.SCALE_SMOOTH);
-            JLabel logoIcon = new JLabel(new ImageIcon(image));
-            logoIcon.setAlignmentX(Component.LEFT_ALIGNMENT);
-            logoPanel.add(logoIcon);
-        } catch (Exception ignored) {}
-
+            java.net.URL imgUrl = getClass().getResource("/icon/logo1.png");
+            if (imgUrl != null) {
+                Image image = javax.imageio.ImageIO.read(imgUrl).getScaledInstance(45, 40, Image.SCALE_SMOOTH);
+                JLabel logoIcon = new JLabel(new ImageIcon(image));
+                logoIcon.setAlignmentX(Component.LEFT_ALIGNMENT);
+                logoPanel.add(logoIcon);
+            } else {
+                System.err.println("Icon not found at /icon/logo1.png");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         logoPanel.add(Box.createVerticalStrut(8));
         JLabel brandLabel = new JLabel("MediCare HMS");
         brandLabel.setFont(UITheme.subheadingFont());
@@ -62,7 +67,7 @@ public class Reception extends JFrame {
         sidebar.add(sep);
         sidebar.add(Box.createVerticalStrut(10));
 
-        // â”€â”€â”€ Navigation Menu Label â”€â”€â”€
+        // --- Navigation Menu Label --- 
         JLabel menuLabel = new JLabel("  MAIN MENU");
         menuLabel.setFont(new Font("Segoe UI", Font.BOLD, 11));
         menuLabel.setForeground(UITheme.TEXT_MUTED);
@@ -73,15 +78,15 @@ public class Reception extends JFrame {
 
         // Nav buttons
         String[] navLabels = {
-            "\u2795  Add New Patient",
-            "🛏️  Room Management",
-            "🏢  Departments",
-            "👥  Employee Info",
-            "📋  Patient Info",
-            "\u2705  Patient Discharge",
-            "\u270F  Update Patient",
-            "🚑  Ambulance",
-            "🔍  Search Room"
+            "  [+]  Add New Patient",
+            "  [#]  Room Management",
+            "  [*]  Departments",
+            "  [@]  Employee Info",
+            "  [i]  Patient Info",
+            "  [-]  Patient Discharge",
+            "  [~]  Update Patient",
+            "  [+]  Ambulance",
+            "  [?]  Search Room"
         };
 
         ActionListener[] navActions = {
@@ -110,7 +115,7 @@ public class Reception extends JFrame {
         sep2.setMaximumSize(new Dimension(250, 2));
         sidebar.add(sep2);
 
-        JButton logoutBtn = UITheme.createNavButton("🚪  Logout", false);
+        JButton logoutBtn = UITheme.createNavButton("  [x]  Logout", false);
         logoutBtn.setForeground(UITheme.DANGER);
         logoutBtn.addActionListener(e -> {
             setVisible(false);
@@ -122,11 +127,11 @@ public class Reception extends JFrame {
 
         mainPanel.add(sidebar, BorderLayout.WEST);
 
-        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN CONTENT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        // --- MAIN CONTENT --- 
         JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBackground(UITheme.BG_PRIMARY);
 
-        // â”€â”€â”€ Header banner â”€â”€â”€
+        // --- Header banner --- 
         JPanel headerPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -165,16 +170,21 @@ public class Reception extends JFrame {
 
         // Doctor image on right
         try {
-            ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/dr.png"));
-            Image img = i1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-            JLabel drLabel = new JLabel(new ImageIcon(img));
-            drLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-            headerPanel.add(drLabel, BorderLayout.EAST);
-        } catch (Exception ignored) {}
+            java.net.URL drUrl = getClass().getResource("/icon/dr.png");
+            if (drUrl != null) {
+                Image img = javax.imageio.ImageIO.read(drUrl).getScaledInstance(140, 140, Image.SCALE_SMOOTH);
+                JLabel drLabel = new JLabel(new ImageIcon(img));
+                headerPanel.add(drLabel, BorderLayout.EAST);
+            } else {
+                System.err.println("Icon not found at /icon/dr.png");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         contentPanel.add(headerPanel, BorderLayout.NORTH);
 
-        // â”€â”€â”€ Stats Cards Grid â”€â”€â”€
+        // --- Stats Cards Grid --- 
         JPanel cardsArea = new JPanel();
         cardsArea.setBackground(UITheme.BG_PRIMARY);
         cardsArea.setBorder(BorderFactory.createEmptyBorder(25, 35, 25, 35));
@@ -188,7 +198,7 @@ public class Reception extends JFrame {
         cardsArea.add(Box.createVerticalStrut(15));
 
         // Fetch stats from DB
-        String patientCount = "â€”", roomCount = "â€”", deptCount = "â€”", ambCount = "â€”";
+        String patientCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", roomCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", deptCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", ambCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â";
         try {
             Conn c = new Conn();
             ResultSet rs1 = c.statement.executeQuery("SELECT COUNT(*) FROM patient_info");
@@ -217,7 +227,7 @@ public class Reception extends JFrame {
         cardsArea.add(cardsGrid);
         cardsArea.add(Box.createVerticalStrut(30));
 
-        // â”€â”€â”€ Quick Actions â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Quick Actions ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JLabel actionsLabel = new JLabel("Quick Actions");
         actionsLabel.setFont(UITheme.subheadingFont());
         actionsLabel.setForeground(UITheme.TEXT_PRIMARY);
@@ -248,8 +258,8 @@ public class Reception extends JFrame {
         contentPanel.add(cardsArea, BorderLayout.CENTER);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-        // â”€â”€â”€ Frame setup â”€â”€â”€
-        UITheme.setupFrame(this, "MediCare HMS â€” Dashboard", 1100, 700);
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        UITheme.setupFrame(this, "MediCare HMS - Dashboard", 1100, 700);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(900, 600));

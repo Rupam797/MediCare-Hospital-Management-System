@@ -14,7 +14,7 @@ public class Login extends JFrame implements ActionListener {
     JButton b1, b2;
 
     Login() {
-        // â”€â”€â”€ Gradient background panel â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Gradient background panel ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel bgPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -30,7 +30,7 @@ public class Login extends JFrame implements ActionListener {
         bgPanel.setLayout(new GridBagLayout());
         setContentPane(bgPanel);
 
-        // â”€â”€â”€ Center login card â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Center login card ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel card = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -56,18 +56,24 @@ public class Login extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
 
-        // â”€â”€â”€ Hospital Logo â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Hospital Logo ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 0;
         gbc.insets = new Insets(25, 30, 5, 30);
         try {
-            ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/logo1.png"));
-            Image i1 = imageIcon.getImage().getScaledInstance(80, 72, Image.SCALE_SMOOTH);
-            JLabel logoLabel = new JLabel(new ImageIcon(i1));
-            logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            card.add(logoLabel, gbc);
-        } catch (Exception ignored) {}
+            java.net.URL imgUrl = getClass().getResource("/icon/logo1.png");
+            if (imgUrl != null) {
+                Image i1 = javax.imageio.ImageIO.read(imgUrl).getScaledInstance(80, 72, Image.SCALE_SMOOTH);
+                JLabel logoLabel = new JLabel(new ImageIcon(i1));
+                logoLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                card.add(logoLabel, gbc);
+            } else {
+                System.err.println("Icon not found at /icon/logo1.png");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // â”€â”€â”€ Title â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Title ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 1;
         gbc.insets = new Insets(5, 30, 2, 30);
         JLabel titleLabel = new JLabel("MediCare HMS");
@@ -76,7 +82,7 @@ public class Login extends JFrame implements ActionListener {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         card.add(titleLabel, gbc);
 
-        // â”€â”€â”€ Subtitle â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Subtitle ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 2;
         gbc.insets = new Insets(0, 30, 20, 30);
         JLabel subtitleLabel = new JLabel("Hospital Management System");
@@ -85,31 +91,31 @@ public class Login extends JFrame implements ActionListener {
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         card.add(subtitleLabel, gbc);
 
-        // â”€â”€â”€ Username label â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Username label ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 3;
         gbc.insets = new Insets(5, 30, 2, 30);
         JLabel namelabel = UITheme.createFormLabel("Username");
         card.add(namelabel, gbc);
 
-        // â”€â”€â”€ Username field â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Username field ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 4;
         gbc.insets = new Insets(2, 30, 10, 30);
         textField = UITheme.createStyledTextField();
         card.add(textField, gbc);
 
-        // â”€â”€â”€ Password label â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Password label ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 5;
         gbc.insets = new Insets(5, 30, 2, 30);
         JLabel passwordLabel = UITheme.createFormLabel("Password");
         card.add(passwordLabel, gbc);
 
-        // â”€â”€â”€ Password field â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Password field ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 6;
         gbc.insets = new Insets(2, 30, 20, 30);
         jPasswordField = UITheme.createStyledPasswordField();
         card.add(jPasswordField, gbc);
 
-        // â”€â”€â”€ Buttons panel â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Buttons panel ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 7;
         gbc.insets = new Insets(5, 30, 25, 30);
         JPanel btnPanel = new JPanel(new GridLayout(1, 2, 12, 0));
@@ -125,11 +131,11 @@ public class Login extends JFrame implements ActionListener {
 
         card.add(btnPanel, gbc);
 
-        // â”€â”€â”€ Add card to background â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Add card to background ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         bgPanel.add(card);
 
-        // â”€â”€â”€ Frame setup â”€â”€â”€
-        UITheme.setupFrame(this, "MediCare HMS â€” Login", 600, 580);
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        UITheme.setupFrame(this, "MediCare HMS - Login", 600, 580);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(500, 520));
         setVisible(true);

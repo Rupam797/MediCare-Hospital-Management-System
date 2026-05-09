@@ -13,20 +13,20 @@ public class Search_room extends JFrame {
     JTable table;
 
     Search_room() {
-        // â”€â”€â”€ Background â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Background ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel bgPanel = UITheme.createGradientPanel();
         bgPanel.setLayout(new BorderLayout(0, 15));
         bgPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         setContentPane(bgPanel);
 
-        // â”€â”€â”€ Header â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Header ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setOpaque(false);
         
-        JLabel titleLabel = UITheme.createTitleLabel("🔍 Search Rooms");
+        JLabel titleLabel = UITheme.createTitleLabel("Ã°Å¸â€Â Search Rooms");
         headerPanel.add(titleLabel, BorderLayout.WEST);
         
-        // â”€â”€â”€ Filter Area â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Filter Area ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
         filterPanel.setOpaque(false);
 
@@ -52,7 +52,7 @@ public class Search_room extends JFrame {
         headerPanel.add(filterPanel, BorderLayout.EAST);
         bgPanel.add(headerPanel, BorderLayout.NORTH);
 
-        // â”€â”€â”€ Main Card with Table â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main Card with Table ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel card = UITheme.createCardPanel();
         card.setLayout(new BorderLayout());
         card.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -73,7 +73,7 @@ public class Search_room extends JFrame {
 
         bgPanel.add(card, BorderLayout.CENTER);
 
-        // â”€â”€â”€ Footer with Back Button â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Footer with Back Button ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         footerPanel.setOpaque(false);
 
@@ -86,8 +86,8 @@ public class Search_room extends JFrame {
 
         bgPanel.add(footerPanel, BorderLayout.SOUTH);
 
-        // â”€â”€â”€ Frame Setup â”€â”€â”€
-        UITheme.setupFrame(this, "MediCare HMS â€” Search Rooms", 900, 600);
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame Setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        UITheme.setupFrame(this, "MediCare HMS - Search Rooms", 900, 600);
         setVisible(true);
     }
 

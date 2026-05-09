@@ -18,12 +18,12 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
     JButton b1, b2;
 
     NEW_PATIENT() {
-        // â”€â”€â”€ Background â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Background ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel bgPanel = UITheme.createGradientPanel();
         bgPanel.setLayout(new GridBagLayout());
         setContentPane(bgPanel);
 
-        // â”€â”€â”€ Main card â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main card ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         JPanel card = UITheme.createCardPanel();
         card.setLayout(new GridBagLayout());
         card.setPreferredSize(new Dimension(600, 580));
@@ -34,14 +34,14 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
 
-        // â”€â”€â”€ Title â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Title ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 0;
         gbc.insets = new Insets(25, 25, 5, 25);
         JLabel titleLabel = UITheme.createTitleLabel("New Patient Registration");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         card.add(titleLabel, gbc);
 
-        // â”€â”€â”€ Separator â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Separator ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 1;
         gbc.insets = new Insets(5, 25, 15, 25);
         card.add(UITheme.createSeparator(), gbc);
@@ -49,7 +49,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         // Now use 2-column layout for form fields
         gbc.gridwidth = 1;
 
-        // â”€â”€â”€ ID Type â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ ID Type ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 2; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -60,7 +60,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         comboBox = UITheme.createStyledComboBox(new String[]{"Aadhar Card", "Voter Id", "Driving License"});
         card.add(comboBox, gbc);
 
-        // â”€â”€â”€ Number â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Number ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 3; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -71,7 +71,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         textFieldNumber = UITheme.createStyledTextField();
         card.add(textFieldNumber, gbc);
 
-        // â”€â”€â”€ Name â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Name ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 4; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -82,7 +82,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         textName = UITheme.createStyledTextField();
         card.add(textName, gbc);
 
-        // â”€â”€â”€ Gender â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Gender ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 5; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -102,7 +102,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         genderPanel.add(r1); genderPanel.add(r2); genderPanel.add(r3);
         card.add(genderPanel, gbc);
 
-        // â”€â”€â”€ Disease â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Disease ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 6; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -113,7 +113,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         textFieldDisease = UITheme.createStyledTextField();
         card.add(textFieldDisease, gbc);
 
-        // â”€â”€â”€ Room â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Room ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 7; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -136,7 +136,7 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         roomCombo = UITheme.createStyledComboBox(rooms.toArray(new String[0]));
         card.add(roomCombo, gbc);
 
-        // â”€â”€â”€ Time â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Time ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 8; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
@@ -148,18 +148,18 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
         date = UITheme.createValueLabel("" + date1);
         card.add(date, gbc);
 
-        // â”€â”€â”€ Deposit â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Deposit ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 9; gbc.gridx = 0;
         gbc.insets = new Insets(5, 25, 5, 10);
         gbc.weightx = 0.3;
-        card.add(UITheme.createFormLabel("Deposit (â‚¹)"), gbc);
+        card.add(UITheme.createFormLabel("Deposit (ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹)"), gbc);
         gbc.gridx = 1;
         gbc.insets = new Insets(5, 10, 5, 25);
         gbc.weightx = 0.7;
         textFieldDeposite = UITheme.createStyledTextField();
         card.add(textFieldDeposite, gbc);
 
-        // â”€â”€â”€ Buttons â”€â”€â”€
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Buttons ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
         gbc.gridy = 10; gbc.gridx = 0;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(20, 25, 25, 25);
@@ -178,8 +178,8 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
 
         bgPanel.add(card);
 
-        // â”€â”€â”€ Frame â”€â”€â”€
-        UITheme.setupFrame(this, "MediCare HMS â€” New Patient", 660, 650);
+        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        UITheme.setupFrame(this, "MediCare HMS - New Patient", 660, 650);
         setVisible(true);
     }
 
