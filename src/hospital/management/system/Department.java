@@ -1,74 +1,71 @@
 package hospital.management.system;
 
-import net.proteanit.sql.DbUtils;
+
 
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 
 public class Department extends JFrame {
-    Department(){
+    
+    Department() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new BorderLayout(0, 15));
+        bgPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setContentPane(bgPanel);
 
-        JPanel panel=new JPanel();
-        panel.setBounds(5,5,690,490);
-        panel.setLayout(null);
-        panel.setBackground(new Color(204,102,102));
-        add(panel);
+        // â”€â”€â”€ Header â”€â”€â”€
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        
+        JLabel titleLabel = UITheme.createTitleLabel("🏢 Departments");
+        headerPanel.add(titleLabel, BorderLayout.WEST);
+        
+        bgPanel.add(headerPanel, BorderLayout.NORTH);
 
+        // â”€â”€â”€ Main Card with Table â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new BorderLayout());
+        card.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        JTable table= new JTable();
-        table.setBounds(0,40,700,350);
-        table.setBackground(new Color(204,102,102));
-        table.setFont(new Font("Tahoma",Font.BOLD,14));
-        panel.add(table);
-
-        try{
-            Conn c= new Conn();
-            String q="select * from department";
-            ResultSet resultSet=c.statement.executeQuery(q);
-            table.setModel(DbUtils.resultSetToTableModel(resultSet));
-        }catch(Exception e){
+        JTable table = new JTable();
+        
+        try {
+            Conn c = new Conn();
+            String q = "select * from department";
+            ResultSet resultSet = c.statement.executeQuery(q);
+            table.setModel(UITheme.resultSetToTableModel(resultSet));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JLabel label1= new JLabel("Department");
-        label1.setBounds(145,11,150,20);
-        label1.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label1);
+        JScrollPane scrollPane = UITheme.createStyledTable(table);
+        card.add(scrollPane, BorderLayout.CENTER);
 
-        JLabel label2= new JLabel("Phone Number");
-        label2.setBounds(431,11,150,20);
-        label2.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label2);
+        bgPanel.add(card, BorderLayout.CENTER);
 
-        JButton b1= new JButton("Back");
-        b1.setBounds(400,410,130,30);
-        b1.setBackground(Color.black);
-        b1.setForeground(Color.white);
-        panel.add(b1);
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
+        // â”€â”€â”€ Footer with Back Button â”€â”€â”€
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        footerPanel.setOpaque(false);
+
+        JButton backBtn = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
+        backBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
         });
+        footerPanel.add(backBtn);
 
+        bgPanel.add(footerPanel, BorderLayout.SOUTH);
 
-
-
-
-
-        setUndecorated(true);
-        setSize(700,500);
-        setLayout(null);
-        setLocation(350,250);
+        // â”€â”€â”€ Frame Setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Departments", 800, 550);
         setVisible(true);
-
     }
+
     public static void main(String[] args) {
-         new Department();
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Department::new);
     }
 }

@@ -2,181 +2,177 @@ package hospital.management.system;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.*;
-import java.util.Calendar;
-import java.util.Map;
+
+import java.sql.ResultSet;
 
 public class Update_patient_details extends JFrame {
-    Update_patient_details(){
 
-        JPanel panel=new JPanel();
-        panel.setBounds(5,5,940,490);
-        panel.setBackground(new Color(204,102,102));
-        panel.setLayout(null);
-        add(panel);
+    JComboBox<String> choice;
+    JTextField textFieldRoom, textFieldINTime, textFieldAmount, textFieldPending;
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/updated.png"));
-        Image image = imageIcon.getImage().getScaledInstance(250, 250, Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1 = new ImageIcon(image);
-        JLabel label = new JLabel(imageIcon1);
-        label.setBounds(500, 60, 300, 300);
-        panel.add(label);
+    Update_patient_details() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new GridBagLayout());
+        setContentPane(bgPanel);
 
-        JLabel label1= new JLabel("Update Patient Details");
-        label1.setBounds(124,11,260,25);
-        label1.setFont(new Font("Tahoma",Font.BOLD,20));
-        panel.add(label1);
+        // â”€â”€â”€ Main Card â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new GridBagLayout());
+        card.setPreferredSize(new Dimension(550, 500));
 
-        JLabel label2 = new JLabel("Name :");
-        label2.setBounds(25,88,100,14);
-        label2.setFont(new Font("Tahoma",Font.PLAIN,14));
-        panel.add(label2);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(8, 25, 8, 25);
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
 
-        Choice choice=new Choice();
-        choice.setBounds(248,85,140,25);
-        panel.add(choice);
+        // â”€â”€â”€ Title â”€â”€â”€
+        gbc.gridy = 0;
+        gbc.insets = new Insets(25, 25, 5, 25);
+        JLabel titleLabel = UITheme.createTitleLabel("\u270F\uFE0F Update Patient Details");
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        card.add(titleLabel, gbc);
 
-        try{
-            Conn c=new Conn();
-            ResultSet resultSet=c.statement.executeQuery("select * from patient_info");
-            while(resultSet.next()){
-                choice.add(resultSet.getString("Name"));
+        // â”€â”€â”€ Separator â”€â”€â”€
+        gbc.gridy = 1;
+        gbc.insets = new Insets(5, 25, 15, 25);
+        card.add(UITheme.createSeparator(), gbc);
+
+        // 2-column layout
+        gbc.gridwidth = 1;
+
+        // â”€â”€â”€ Name â”€â”€â”€
+        gbc.gridy = 2; gbc.gridx = 0;
+        gbc.insets = new Insets(8, 25, 8, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Patient Name"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(8, 10, 8, 25);
+        gbc.weightx = 0.7;
+        
+        java.util.ArrayList<String> patients = new java.util.ArrayList<>();
+        try {
+            Conn c = new Conn();
+            ResultSet resultSet = c.statement.executeQuery("select * from patient_info");
+            while (resultSet.next()) {
+                patients.add(resultSet.getString("Name"));
             }
-
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
+        choice = UITheme.createStyledComboBox(patients.toArray(new String[0]));
+        card.add(choice, gbc);
 
-        JLabel label3 = new JLabel("Room Number");
-        label3.setBounds(25,130,100,14);
-        label3.setFont(new Font("Tahoma",Font.PLAIN,14));
-        panel.add(label3);
+        // â”€â”€â”€ Room Number â”€â”€â”€
+        gbc.gridy = 3; gbc.gridx = 0;
+        gbc.insets = new Insets(8, 25, 8, 10);
+        card.add(UITheme.createFormLabel("Room Number"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(8, 10, 8, 25);
+        textFieldRoom = UITheme.createStyledTextField();
+        card.add(textFieldRoom, gbc);
 
-        JTextField textField=new JTextField();
-        textField.setBounds(248,129,140,20);
-        panel.add(textField);
+        // â”€â”€â”€ In Time â”€â”€â”€
+        gbc.gridy = 4; gbc.gridx = 0;
+        gbc.insets = new Insets(8, 25, 8, 10);
+        card.add(UITheme.createFormLabel("Admission Time"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(8, 10, 8, 25);
+        textFieldINTime = UITheme.createStyledTextField();
+        card.add(textFieldINTime, gbc);
 
-        JLabel label4 = new JLabel("In-Time");
-        label4.setBounds(25,174,100,14);
-        label4.setFont(new Font("Tahoma",Font.PLAIN,14));
-        panel.add(label4);
+        // â”€â”€â”€ Amount Paid â”€â”€â”€
+        gbc.gridy = 5; gbc.gridx = 0;
+        gbc.insets = new Insets(8, 25, 8, 10);
+        card.add(UITheme.createFormLabel("Amount Paid (â‚¹)"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(8, 10, 8, 25);
+        textFieldAmount = UITheme.createStyledTextField();
+        card.add(textFieldAmount, gbc);
 
-        JTextField textFieldINTime =new JTextField();
-        textFieldINTime.setBounds(248,174,140,20);
-        panel.add(textFieldINTime);
+        // â”€â”€â”€ Pending â”€â”€â”€
+        gbc.gridy = 6; gbc.gridx = 0;
+        gbc.insets = new Insets(8, 25, 8, 10);
+        card.add(UITheme.createFormLabel("Pending Amount (â‚¹)"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(8, 10, 8, 25);
+        textFieldPending = UITheme.createStyledTextField();
+        textFieldPending.setEditable(false);
+        card.add(textFieldPending, gbc);
 
-        JLabel label5 = new JLabel("Amount Paid (RS) :");
-        label5.setBounds(25,216,150,14);
-        label5.setFont(new Font("Tahoma",Font.PLAIN,14));
-        panel.add(label5);
+        // â”€â”€â”€ Buttons â”€â”€â”€
+        gbc.gridy = 7; gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(25, 25, 25, 25);
+        
+        JPanel btnPanel = new JPanel(new GridLayout(1, 3, 10, 0));
+        btnPanel.setOpaque(false);
 
-        JTextField textFieldAmount =new JTextField();
-        textFieldAmount.setBounds(248,216,140,20);
-        panel.add(textFieldAmount);
-
-
-        JLabel label6 = new JLabel("Pending :");
-        label6.setBounds(25,261,100,20);
-        label6.setFont(new Font("Tahoma",Font.PLAIN,14));
-        panel.add(label6);
-
-        JTextField textFieldPending =new JTextField();
-        textFieldPending.setBounds(248,261,140,20);
-        panel.add(textFieldPending);
-
-
-        JButton check=new JButton("CHECK");
-        check.setBounds(281,378,89,23);
-        check.setBackground(Color.black);
-        check.setForeground(Color.WHITE);
-        panel.add(check);
-        check.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String id=choice.getSelectedItem();
-                String q="select * from Patient_info where Name='"+id+"'";
-                try{
-
-                    Conn c=new Conn();
-                    ResultSet resultSet=c.statement.executeQuery(q);
-                    while(resultSet.next()){
-                        textField.setText(resultSet.getString("Room_NUmber"));
-                        textFieldINTime.setText(resultSet.getString("Time"));
-                        textFieldAmount.setText(resultSet.getString("Deposite"));
-
-                    }
-                    ResultSet resultSet2=c.statement.executeQuery("select * from room where Room_no='"+textField.getText()+"'");
-                    while(resultSet2.next()){
-                        String price=resultSet2.getString("Price");
-                        int amountPaid=Integer.parseInt(price)-Integer.parseInt(textFieldAmount.getText());
-                        textFieldPending.setText(""+amountPaid);
-                    }
-                }catch(Exception E){
-                    E.printStackTrace();
+        JButton checkBtn = UITheme.createStyledButton("Check", UITheme.ButtonType.PRIMARY);
+        checkBtn.addActionListener(e -> {
+            String id = (String) choice.getSelectedItem();
+            String q = "select * from Patient_info where Name='" + id + "'";
+            try {
+                Conn c = new Conn();
+                ResultSet resultSet = c.statement.executeQuery(q);
+                while (resultSet.next()) {
+                    textFieldRoom.setText(resultSet.getString("Room_NUmber"));
+                    textFieldINTime.setText(resultSet.getString("Time"));
+                    textFieldAmount.setText(resultSet.getString("Deposite"));
                 }
+                ResultSet resultSet2 = c.statement.executeQuery("select * from room where Room_no='" + textFieldRoom.getText() + "'");
+                while (resultSet2.next()) {
+                    String price = resultSet2.getString("Price");
+                    int amountPaid = Integer.parseInt(price) - Integer.parseInt(textFieldAmount.getText());
+                    textFieldPending.setText("" + amountPaid);
+                }
+            } catch (Exception E) {
+                E.printStackTrace();
             }
         });
+        btnPanel.add(checkBtn);
 
-
-
-        JButton update=new JButton("UPDATE");
-        update.setBounds(56,378,89,23);
-        update.setBackground(Color.black);
-        update.setForeground(Color.WHITE);
-        panel.add(update);
-        update.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Conn c = new Conn();
-                    String q = choice.getSelectedItem();
-                    String room=textField.getText();
-                    String time=textFieldINTime.getText();
-                    String amount=textFieldAmount.getText();
-                    c.statement.executeUpdate("update Patient_info set Room_Number='"+room+"',Time='"+time+"',Deposite='"+amount+"' where name ='"+q+"'");
-                    JOptionPane.showMessageDialog(null,"Updated Successfully");
-                    setVisible(false);
-                }catch(Exception p){
-                    p.printStackTrace();
-
-                }
-            }
-        });
-
-
-        JButton button2 =new JButton("BACK");
-        button2.setBounds(168,378,89,23);
-        button2.setBackground(Color.BLACK);
-        button2.setForeground(Color.WHITE);
-        panel.add(button2);
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        JButton updateBtn = UITheme.createStyledButton("Update", UITheme.ButtonType.SUCCESS);
+        updateBtn.addActionListener(e -> {
+            try {
+                Conn c = new Conn();
+                String q = (String) choice.getSelectedItem();
+                String room = textFieldRoom.getText();
+                String time = textFieldINTime.getText();
+                String amount = textFieldAmount.getText();
+                c.statement.executeUpdate("update Patient_info set Room_Number='" + room + "',Time='" + time + "',Deposite='" + amount + "' where name ='" + q + "'");
+                UITheme.showSuccess(this, "Patient details updated successfully.");
                 setVisible(false);
+                dispose();
+            } catch (Exception p) {
+                p.printStackTrace();
             }
         });
+        btnPanel.add(updateBtn);
 
+        JButton backBtn = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
+        backBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
+        });
+        btnPanel.add(backBtn);
 
+        card.add(btnPanel, gbc);
+        bgPanel.add(card);
 
-
-
-
-        setUndecorated(true);
-        setSize(950,500);
-        setLayout(null);
-        setLocation(400,250);
+        // â”€â”€â”€ Frame Setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Update Patient Details", 650, 600);
         setVisible(true);
-
     }
-    public static void main(String[] args) {
-        new Update_patient_details();
 
+    public static void main(String[] args) {
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Update_patient_details::new);
     }
 }

@@ -1,88 +1,71 @@
 package hospital.management.system;
 
-import net.proteanit.sql.DbUtils;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 
 public class Ambulance extends JFrame {
-    Ambulance(){
-        JPanel panel=new JPanel();
-        panel.setBounds(5,5,900,590);
-        panel.setBackground(new Color(204,102,102));
-        panel.setLayout(null);
-        add(panel);
+    
+    Ambulance() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new BorderLayout(0, 15));
+        bgPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setContentPane(bgPanel);
 
-        JTable table=new JTable();
-        table.setBounds(10,34,900,450);
-        table.setBackground(new Color(204,102,102));
-        table.setFont(new Font("Tahoma", Font.BOLD,12));
-        panel.add(table);
+        // â”€â”€â”€ Header â”€â”€â”€
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        
+        JLabel titleLabel = UITheme.createTitleLabel("🚑 Ambulance Details");
+        headerPanel.add(titleLabel, BorderLayout.WEST);
+        
+        bgPanel.add(headerPanel, BorderLayout.NORTH);
 
-        try{
-            Conn c=new Conn();
-            String q="select * from Ambulance";
-            ResultSet resultset=c.statement.executeQuery(q);
-            table.setModel((DbUtils.resultSetToTableModel(resultset)));
+        // â”€â”€â”€ Main Card with Table â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new BorderLayout());
+        card.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        }catch(Exception e){
+        JTable table = new JTable();
+        
+        try {
+            Conn c = new Conn();
+            String q = "select * from Ambulance";
+            ResultSet resultset = c.statement.executeQuery(q);
+            table.setModel(UITheme.resultSetToTableModel(resultset));
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
 
-        JLabel label1= new JLabel("Name");
-        label1.setBounds(70,11,150,20);
-        label1.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label1);
+        JScrollPane scrollPane = UITheme.createStyledTable(table);
+        card.add(scrollPane, BorderLayout.CENTER);
 
-        JLabel label2 = new JLabel("Gender");
-        label2.setBounds(250,11,150,20);
-        label2.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label2);
+        bgPanel.add(card, BorderLayout.CENTER);
 
-        JLabel label3 = new JLabel("Car Name");
-        label3.setBounds(420,11,150,20);
-        label3.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label3);
+        // â”€â”€â”€ Footer with Back Button â”€â”€â”€
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        footerPanel.setOpaque(false);
 
-        JLabel label4 = new JLabel("Available");
-        label4.setBounds(600,11,150,20);
-        label4.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label4);
-
-        JLabel label5 = new JLabel("Location");
-        label5.setBounds(775,11,150,20);
-        label5.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label5);
-
-
-
-
-        JButton button=new JButton("back");
-        button.setBounds(350,500,120,30);
-        button.setBackground(Color.BLACK);
-        button.setForeground(Color.WHITE);
-        panel.add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-            }
+        JButton backBtn = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
+        backBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
         });
+        footerPanel.add(backBtn);
 
+        bgPanel.add(footerPanel, BorderLayout.SOUTH);
 
-        setUndecorated(true);
-        setSize(910,600);
-        setLayout(null);
-        setLocation(430,100);
+        // â”€â”€â”€ Frame Setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Ambulance Details", 950, 600);
         setVisible(true);
-
     }
 
     public static void main(String[] args) {
-        new Ambulance();
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Ambulance::new);
     }
 }

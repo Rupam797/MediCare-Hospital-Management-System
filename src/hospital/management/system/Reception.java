@@ -2,173 +2,262 @@ package hospital.management.system;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+
+import java.sql.ResultSet;
 
 public class Reception extends JFrame {
 
+    Reception() {
+        UITheme.installTheme();
 
-    Reception(){
+        // â”€â”€â”€ Main layout â”€â”€â”€
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBackground(UITheme.BG_PRIMARY);
+        setContentPane(mainPanel);
 
+        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• LEFT SIDEBAR â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        JPanel sidebar = new JPanel();
+        sidebar.setBackground(UITheme.BG_SECONDARY);
+        sidebar.setPreferredSize(new Dimension(250, 0));
+        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
+        sidebar.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, UITheme.BORDER));
 
+        // Logo area
+        JPanel logoPanel = new JPanel();
+        logoPanel.setBackground(UITheme.BG_SECONDARY);
+        logoPanel.setLayout(new BoxLayout(logoPanel, BoxLayout.Y_AXIS));
+        logoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 15, 20));
+        logoPanel.setMaximumSize(new Dimension(250, 100));
+        logoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JPanel panel=new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(5,160,1525,670);
-        panel.setBackground(new Color(204,102,102));
-        add(panel);
+        try {
+            ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/logo1.png"));
+            Image image = i1.getImage().getScaledInstance(45, 40, Image.SCALE_SMOOTH);
+            JLabel logoIcon = new JLabel(new ImageIcon(image));
+            logoIcon.setAlignmentX(Component.LEFT_ALIGNMENT);
+            logoPanel.add(logoIcon);
+        } catch (Exception ignored) {}
 
-        JPanel panel1=new JPanel();
-        panel1.setLayout(null);
-        panel1.setBounds(5,5,1525,150);
-        panel1.setBackground(new Color(204,102,102));
-        add(panel1);
+        logoPanel.add(Box.createVerticalStrut(8));
+        JLabel brandLabel = new JLabel("MediCare HMS");
+        brandLabel.setFont(UITheme.subheadingFont());
+        brandLabel.setForeground(UITheme.ACCENT);
+        brandLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        logoPanel.add(brandLabel);
 
-        ImageIcon i1=new ImageIcon(ClassLoader.getSystemResource("icon/dr.png"));
-        Image image=i1.getImage().getScaledInstance(250,250,Image.SCALE_DEFAULT);
-        ImageIcon i2=new ImageIcon(image);
-        JLabel label=new JLabel(i2);
-        label.setBounds(1300,0,250,250);
-        panel1.add(label);
+        JLabel tagline = new JLabel("Hospital Management");
+        tagline.setFont(UITheme.smallFont());
+        tagline.setForeground(UITheme.TEXT_MUTED);
+        tagline.setAlignmentX(Component.LEFT_ALIGNMENT);
+        logoPanel.add(tagline);
 
+        sidebar.add(logoPanel);
+        sidebar.add(Box.createVerticalStrut(10));
 
-        JButton b1=new JButton("Add new patient");
-        b1.setBounds(30,15,200,30);
-        b1.setBackground(new Color(246,215,118));
-        panel1.add(b1);
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new NEW_PATIENT();
+        // Separator
+        JSeparator sep = UITheme.createSeparator();
+        sep.setMaximumSize(new Dimension(250, 2));
+        sidebar.add(sep);
+        sidebar.add(Box.createVerticalStrut(10));
 
-            }
+        // â”€â”€â”€ Navigation Menu Label â”€â”€â”€
+        JLabel menuLabel = new JLabel("  MAIN MENU");
+        menuLabel.setFont(new Font("Segoe UI", Font.BOLD, 11));
+        menuLabel.setForeground(UITheme.TEXT_MUTED);
+        menuLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        menuLabel.setBorder(BorderFactory.createEmptyBorder(5, 15, 8, 0));
+        menuLabel.setMaximumSize(new Dimension(250, 25));
+        sidebar.add(menuLabel);
+
+        // Nav buttons
+        String[] navLabels = {
+            "\u2795  Add New Patient",
+            "🛏️  Room Management",
+            "🏢  Departments",
+            "👥  Employee Info",
+            "📋  Patient Info",
+            "\u2705  Patient Discharge",
+            "\u270F  Update Patient",
+            "🚑  Ambulance",
+            "🔍  Search Room"
+        };
+
+        ActionListener[] navActions = {
+            e -> new NEW_PATIENT(),
+            e -> new Room(),
+            e -> new Department(),
+            e -> new Employee_info(),
+            e -> new Patient_info(),
+            e -> new Patient_discharge(),
+            e -> new Update_patient_details(),
+            e -> new Ambulance(),
+            e -> new Search_room()
+        };
+
+        for (int i = 0; i < navLabels.length; i++) {
+            JButton navBtn = UITheme.createNavButton(navLabels[i], false);
+            navBtn.addActionListener(navActions[i]);
+            sidebar.add(navBtn);
+        }
+
+        sidebar.add(Box.createVerticalGlue());
+
+        // Logout at bottom
+        sidebar.add(Box.createVerticalStrut(10));
+        JSeparator sep2 = UITheme.createSeparator();
+        sep2.setMaximumSize(new Dimension(250, 2));
+        sidebar.add(sep2);
+
+        JButton logoutBtn = UITheme.createNavButton("🚪  Logout", false);
+        logoutBtn.setForeground(UITheme.DANGER);
+        logoutBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
+            new Login();
         });
+        sidebar.add(logoutBtn);
+        sidebar.add(Box.createVerticalStrut(15));
 
-        JButton b2=new JButton("Room");
-        b2.setBounds(30,58,200,30);
-        b2.setBackground(new Color(246,215,118));
-        panel1.add(b2);
-        b2.addActionListener(new ActionListener() {
+        mainPanel.add(sidebar, BorderLayout.WEST);
+
+        // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• MAIN CONTENT â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBackground(UITheme.BG_PRIMARY);
+
+        // â”€â”€â”€ Header banner â”€â”€â”€
+        JPanel headerPanel = new JPanel() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                new Room();
-
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+                GradientPaint gp = new GradientPaint(0, 0, UITheme.BG_CARD,
+                        getWidth(), 0, new Color(0x00, 0x6d, 0x8f));
+                g2.setPaint(gp);
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                g2.dispose();
             }
-        });
+        };
+        headerPanel.setLayout(new BorderLayout());
+        headerPanel.setPreferredSize(new Dimension(0, 140));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(25, 35, 25, 35));
 
-        JButton b3=new JButton("Department");
-        b3.setBounds(30,100,200,30);
-        b3.setBackground(new Color(246,215,118));
-        panel1.add(b3);
-        b3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        JPanel headerText = new JPanel();
+        headerText.setOpaque(false);
+        headerText.setLayout(new BoxLayout(headerText, BoxLayout.Y_AXIS));
 
-                new Department();
-            }
-        });
+        JLabel welcomeLabel = new JLabel("Welcome Back!");
+        welcomeLabel.setFont(UITheme.headingFont());
+        welcomeLabel.setForeground(Color.WHITE);
+        welcomeLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        headerText.add(welcomeLabel);
 
-        JButton b4=new JButton("All Employee Info");
-        b4.setBounds(270,15,200,30);
-        b4.setBackground(new Color(246,215,118));
-        panel1.add(b4);
-        b4.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Employee_info();
+        headerText.add(Box.createVerticalStrut(6));
 
-            }
-        });
+        JLabel welcomeSub = new JLabel("Manage your hospital operations from the dashboard below.");
+        welcomeSub.setFont(UITheme.bodyFont());
+        welcomeSub.setForeground(new Color(0xb0, 0xd0, 0xe0));
+        welcomeSub.setAlignmentX(Component.LEFT_ALIGNMENT);
+        headerText.add(welcomeSub);
 
-        JButton b5=new JButton("Patient Info");
-        b5.setBounds(270,58,200,30);
-        b5.setBackground(new Color(246,215,118));
-        panel1.add(b5);
-        b5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Patient_info();
+        headerPanel.add(headerText, BorderLayout.CENTER);
 
-            }
-        });
+        // Doctor image on right
+        try {
+            ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/dr.png"));
+            Image img = i1.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            JLabel drLabel = new JLabel(new ImageIcon(img));
+            drLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+            headerPanel.add(drLabel, BorderLayout.EAST);
+        } catch (Exception ignored) {}
 
-        JButton b6=new JButton("Patient Discharge");
-        b6.setBounds(270,100,200,30);
-        b6.setBackground(new Color(246,215,118));
-        panel1.add(b6);
-        b6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        contentPanel.add(headerPanel, BorderLayout.NORTH);
 
-                new Patient_discharge();
-            }
-        });
+        // â”€â”€â”€ Stats Cards Grid â”€â”€â”€
+        JPanel cardsArea = new JPanel();
+        cardsArea.setBackground(UITheme.BG_PRIMARY);
+        cardsArea.setBorder(BorderFactory.createEmptyBorder(25, 35, 25, 35));
+        cardsArea.setLayout(new BoxLayout(cardsArea, BoxLayout.Y_AXIS));
 
-        JButton b7=new JButton("Update Patient Details");
-        b7.setBounds(510,15,200,30);
-        b7.setBackground(new Color(246,215,118));
-        panel1.add(b7);
-        b7.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        JLabel overviewLabel = new JLabel("Quick Overview");
+        overviewLabel.setFont(UITheme.subheadingFont());
+        overviewLabel.setForeground(UITheme.TEXT_PRIMARY);
+        overviewLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cardsArea.add(overviewLabel);
+        cardsArea.add(Box.createVerticalStrut(15));
 
-                new Update_patient_details();
-            }
-        });
+        // Fetch stats from DB
+        String patientCount = "â€”", roomCount = "â€”", deptCount = "â€”", ambCount = "â€”";
+        try {
+            Conn c = new Conn();
+            ResultSet rs1 = c.statement.executeQuery("SELECT COUNT(*) FROM patient_info");
+            if (rs1.next()) patientCount = rs1.getString(1);
 
-        JButton b8=new JButton("Hospital Ambulance Details");
-        b8.setBounds(510,58,200,30);
-        b8.setBackground(new Color(246,215,118));
-        panel1.add(b8);
-        b8.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            ResultSet rs2 = c.statement.executeQuery("SELECT COUNT(*) FROM Room WHERE Availablity='Available'");
+            if (rs2.next()) roomCount = rs2.getString(1);
 
-                new Ambulance();
-            }
-        });
+            ResultSet rs3 = c.statement.executeQuery("SELECT COUNT(*) FROM department");
+            if (rs3.next()) deptCount = rs3.getString(1);
 
-        JButton b9=new JButton("Search Room");
-        b9.setBounds(510,100,200,30);
-        b9.setBackground(new Color(246,215,118));
-        panel1.add(b9);
-        b9.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+            ResultSet rs4 = c.statement.executeQuery("SELECT COUNT(*) FROM Ambulance");
+            if (rs4.next()) ambCount = rs4.getString(1);
+        } catch (Exception ignored) {}
 
-                new Search_room();
-            }
-        });
+        JPanel cardsGrid = new JPanel(new GridLayout(1, 4, 18, 0));
+        cardsGrid.setOpaque(false);
+        cardsGrid.setMaximumSize(new Dimension(Integer.MAX_VALUE, 120));
+        cardsGrid.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JButton b10 =new JButton("Logout");
-        b10.setBounds(750,15,200,30);
-        b10.setBackground(new Color(246,215,118));
-        panel1.add(b10);
-        b10.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        cardsGrid.add(UITheme.createStatsCard("Total Patients", patientCount, UITheme.ACCENT));
+        cardsGrid.add(UITheme.createStatsCard("Available Rooms", roomCount, UITheme.SUCCESS));
+        cardsGrid.add(UITheme.createStatsCard("Departments", deptCount, UITheme.WARNING));
+        cardsGrid.add(UITheme.createStatsCard("Ambulances", ambCount, UITheme.DANGER));
 
-                setVisible(false);
-                new Login();
-            }
-        });
+        cardsArea.add(cardsGrid);
+        cardsArea.add(Box.createVerticalStrut(30));
 
+        // â”€â”€â”€ Quick Actions â”€â”€â”€
+        JLabel actionsLabel = new JLabel("Quick Actions");
+        actionsLabel.setFont(UITheme.subheadingFont());
+        actionsLabel.setForeground(UITheme.TEXT_PRIMARY);
+        actionsLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        cardsArea.add(actionsLabel);
+        cardsArea.add(Box.createVerticalStrut(15));
 
+        JPanel actionsGrid = new JPanel(new GridLayout(1, 3, 18, 0));
+        actionsGrid.setOpaque(false);
+        actionsGrid.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
+        actionsGrid.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+        JButton qAddPatient = UITheme.createStyledButton("+ New Patient", UITheme.ButtonType.PRIMARY);
+        qAddPatient.addActionListener(e -> new NEW_PATIENT());
+        actionsGrid.add(qAddPatient);
 
+        JButton qDischarge = UITheme.createStyledButton("Discharge Patient", UITheme.ButtonType.SUCCESS);
+        qDischarge.addActionListener(e -> new Patient_discharge());
+        actionsGrid.add(qDischarge);
 
+        JButton qSearch = UITheme.createStyledButton("Search Rooms", UITheme.ButtonType.OUTLINE);
+        qSearch.addActionListener(e -> new Search_room());
+        actionsGrid.add(qSearch);
 
+        cardsArea.add(actionsGrid);
+        cardsArea.add(Box.createVerticalGlue());
 
-        setSize(1950,1090);
-        setLayout(null);
-        getContentPane().setBackground(Color.WHITE);
+        contentPanel.add(cardsArea, BorderLayout.CENTER);
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+
+        // â”€â”€â”€ Frame setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Dashboard", 1100, 700);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setMinimumSize(new Dimension(900, 600));
         setVisible(true);
-
     }
+
     public static void main(String[] args) {
-
-
-        new Reception();
-
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Reception::new);
     }
 }

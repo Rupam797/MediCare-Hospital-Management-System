@@ -2,145 +2,156 @@ package hospital.management.system;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 import java.util.Date;
 
 public class Patient_discharge extends JFrame {
-    Patient_discharge(){
 
-        JPanel panel=new JPanel();
-        panel.setBounds(5,5,790,390);
-        panel.setBackground(new Color(204,102,102));
-        panel.setLayout(null);
-        add(panel);
+    JComboBox<String> choice;
+    JLabel RNo, INTime, OUTime;
 
-        JLabel label1= new JLabel("CHECK_OUT");
-        label1.setBounds(50,11,150,20);
-        label1.setFont(new Font("Tahoma",Font.BOLD,16));
-        panel.add(label1);
+    Patient_discharge() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new GridBagLayout());
+        setContentPane(bgPanel);
 
-        JLabel label2 = new JLabel("Patient ID");
-        label2.setBounds(30,80,150,20);
-        label2.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(label2);
+        // â”€â”€â”€ Main Card â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new GridBagLayout());
+        card.setPreferredSize(new Dimension(500, 450));
 
-        Choice choice=new Choice();
-        choice.setBounds(200,80,150,25);
-        panel.add(choice);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 25, 10, 25);
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
 
-        try{
-            Conn c=new Conn();
-            ResultSet resultSet=c.statement.executeQuery("select * from patient_info");
-            while(resultSet.next()){
-                choice.add(resultSet.getString("number"));
+        // â”€â”€â”€ Title â”€â”€â”€
+        gbc.gridy = 0;
+        gbc.insets = new Insets(25, 25, 5, 25);
+        JLabel titleLabel = UITheme.createTitleLabel("Patient Discharge");
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        card.add(titleLabel, gbc);
+
+        // â”€â”€â”€ Separator â”€â”€â”€
+        gbc.gridy = 1;
+        gbc.insets = new Insets(5, 25, 15, 25);
+        card.add(UITheme.createSeparator(), gbc);
+
+        // 2-column layout
+        gbc.gridwidth = 1;
+
+        // â”€â”€â”€ Patient ID â”€â”€â”€
+        gbc.gridy = 2; gbc.gridx = 0;
+        gbc.insets = new Insets(10, 25, 10, 10);
+        gbc.weightx = 0.4;
+        card.add(UITheme.createFormLabel("Patient ID"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(10, 10, 10, 25);
+        gbc.weightx = 0.6;
+        
+        java.util.ArrayList<String> patients = new java.util.ArrayList<>();
+        try {
+            Conn c = new Conn();
+            ResultSet resultSet = c.statement.executeQuery("select * from patient_info");
+            while (resultSet.next()) {
+                patients.add(resultSet.getString("number"));
             }
-
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
-        JLabel label3 = new JLabel("Room Number");
-        label3.setBounds(30,130,150,20);
-        label3.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(label3);
+        choice = UITheme.createStyledComboBox(patients.toArray(new String[0]));
+        card.add(choice, gbc);
 
-        JLabel RNo = new JLabel();
-        RNo.setBounds(200,130,150,20);
-        RNo.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(RNo);
+        // â”€â”€â”€ Room Number â”€â”€â”€
+        gbc.gridy = 3; gbc.gridx = 0;
+        gbc.insets = new Insets(10, 25, 10, 10);
+        card.add(UITheme.createFormLabel("Room Number"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(10, 10, 10, 25);
+        RNo = UITheme.createValueLabel("â€”");
+        card.add(RNo, gbc);
 
-        JLabel label4 = new JLabel("In Time");
-        label4.setBounds(30,180,150,20);
-        label4.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(label4);
+        // â”€â”€â”€ In Time â”€â”€â”€
+        gbc.gridy = 4; gbc.gridx = 0;
+        gbc.insets = new Insets(10, 25, 10, 10);
+        card.add(UITheme.createFormLabel("Admission Time"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(10, 10, 10, 25);
+        INTime = UITheme.createValueLabel("â€”");
+        card.add(INTime, gbc);
 
-        JLabel INTime = new JLabel();
-        INTime.setBounds(200,180,250,20);
-        INTime.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(INTime);
+        // â”€â”€â”€ Out Time â”€â”€â”€
+        gbc.gridy = 5; gbc.gridx = 0;
+        gbc.insets = new Insets(10, 25, 10, 10);
+        card.add(UITheme.createFormLabel("Discharge Time"), gbc);
+        
+        gbc.gridx = 1;
+        gbc.insets = new Insets(10, 10, 10, 25);
+        Date date = new Date();
+        OUTime = UITheme.createValueLabel("" + date);
+        card.add(OUTime, gbc);
 
-        JLabel label5 = new JLabel("Out Time");
-        label5.setBounds(30,230,150,20);
-        label5.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(label5);
+        // â”€â”€â”€ Buttons â”€â”€â”€
+        gbc.gridy = 6; gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(25, 25, 25, 25);
+        
+        JPanel btnPanel = new JPanel(new GridLayout(1, 3, 10, 0));
+        btnPanel.setOpaque(false);
 
-        Date date=new Date();
-
-        JLabel OUTime = new JLabel(""+date);
-        OUTime.setBounds(200,230,250,20);
-        OUTime.setFont(new Font("Tahoma",Font.BOLD,15));
-        panel.add(OUTime);
-
-        JButton button=new JButton("DISCHARGE");
-        button.setBounds(30,300,120,30);
-        button.setBackground(Color.BLACK);
-        button.setForeground(Color.WHITE);
-        panel.add(button);
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Conn c=new Conn();
-                try{
-                   c.statement.executeUpdate("delete from patient_info where number='"+choice.getSelectedItem()+"'");
-                   c.statement.executeUpdate("update room set Availablity='Available' where Room_no='"+RNo.getText()+"'" );
-                   JOptionPane.showMessageDialog(null,"Done");
-                   setVisible(false);
-                }catch(Exception E){
-                    E.printStackTrace();
+        JButton checkBtn = UITheme.createStyledButton("Check", UITheme.ButtonType.PRIMARY);
+        checkBtn.addActionListener(e -> {
+            Conn c = new Conn();
+            try {
+                ResultSet resultSet = c.statement.executeQuery("select * from patient_info where number='" + choice.getSelectedItem() + "'");
+                while (resultSet.next()) {
+                    RNo.setText(resultSet.getString("Room_number"));
+                    INTime.setText(resultSet.getString("Time"));
                 }
+            } catch (Exception E) {
+                E.printStackTrace();
             }
         });
+        btnPanel.add(checkBtn);
 
-
-        JButton button1 =new JButton("CHECK");
-        button1.setBounds(170,300,120,30);
-        button1.setBackground(Color.BLACK);
-        button1.setForeground(Color.WHITE);
-        panel.add(button1);
-        button1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Conn c=new Conn();
-                try{
-                    ResultSet resultSet=c.statement.executeQuery("select * from patient_info where number='"+choice.getSelectedItem()+"'");
-
-                    while(resultSet.next()) {
-                        RNo.setText(resultSet.getString("Room_number"));
-                        INTime.setText(resultSet.getString("Time"));
-                    }
-                }catch(Exception E){
-                    E.printStackTrace();
-                }
-            }
-        });
-
-
-        JButton button2 =new JButton("BACK");
-        button2.setBounds(300,300,120,30);
-        button2.setBackground(Color.BLACK);
-        button2.setForeground(Color.WHITE);
-        panel.add(button2);
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        JButton dischargeBtn = UITheme.createStyledButton("Discharge", UITheme.ButtonType.DANGER);
+        dischargeBtn.addActionListener(e -> {
+            Conn c = new Conn();
+            try {
+                c.statement.executeUpdate("delete from patient_info where number='" + choice.getSelectedItem() + "'");
+                c.statement.executeUpdate("update room set Availablity='Available' where Room_no='" + RNo.getText() + "'");
+                UITheme.showSuccess(this, "Patient discharged successfully.");
                 setVisible(false);
+                dispose();
+            } catch (Exception E) {
+                E.printStackTrace();
             }
         });
+        btnPanel.add(dischargeBtn);
 
+        JButton backBtn = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
+        backBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
+        });
+        btnPanel.add(backBtn);
 
+        card.add(btnPanel, gbc);
+        bgPanel.add(card);
 
-
-        setUndecorated(true);
-        setSize(800,400);
-        setLayout(null);
-        setLocation(400,250);
+        // â”€â”€â”€ Frame Setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Patient Discharge", 600, 550);
         setVisible(true);
     }
 
     public static void main(String[] args) {
-
-        new Patient_discharge();
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Patient_discharge::new);
     }
 }

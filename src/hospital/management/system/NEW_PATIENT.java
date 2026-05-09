@@ -4,189 +4,188 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 import java.util.Date;
 
 public class NEW_PATIENT extends JFrame implements ActionListener {
 
-    JComboBox comboBox;
-
+    JComboBox<String> comboBox;
     JTextField textFieldNumber, textName, textFieldDisease, textFieldDeposite;
-
     JRadioButton r1, r2, r3;
-
-    Choice c1;
-
+    JComboBox<String> roomCombo;
     JLabel date;
-
     JButton b1, b2;
 
-
     NEW_PATIENT() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new GridBagLayout());
+        setContentPane(bgPanel);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        panel.setBounds(5, 5, 840, 540);
-        panel.setBackground(new Color(204, 102, 102));
-        add(panel);
+        // â”€â”€â”€ Main card â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new GridBagLayout());
+        card.setPreferredSize(new Dimension(600, 580));
 
-        ImageIcon imageIcon = new ImageIcon(ClassLoader.getSystemResource("icon/patient.png"));
-        Image image = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1 = new ImageIcon(image);
-        JLabel label = new JLabel(imageIcon1);
-        label.setBounds(550, 150, 200, 200);
-        panel.add(label);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 25, 5, 25);
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
 
+        // â”€â”€â”€ Title â”€â”€â”€
+        gbc.gridy = 0;
+        gbc.insets = new Insets(25, 25, 5, 25);
+        JLabel titleLabel = UITheme.createTitleLabel("New Patient Registration");
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        card.add(titleLabel, gbc);
 
-        JLabel labelName = new JLabel("NEW PATIENT FROM");
-        labelName.setBounds(118, 11, 260, 53);
-        labelName.setFont(new Font("Tahoma", Font.BOLD, 20));
-        panel.add(labelName);
+        // â”€â”€â”€ Separator â”€â”€â”€
+        gbc.gridy = 1;
+        gbc.insets = new Insets(5, 25, 15, 25);
+        card.add(UITheme.createSeparator(), gbc);
 
-        JLabel labelId = new JLabel("ID:");
-        labelId.setBounds(35, 76, 200, 14);
-        labelId.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelId.setForeground(Color.WHITE);
-        panel.add(labelId);
+        // Now use 2-column layout for form fields
+        gbc.gridwidth = 1;
 
-        comboBox = new JComboBox(new String[]{"Aadhar Card", "Voter Id", "Driving license"});
-        comboBox.setBounds(271, 73, 150, 20);
-        comboBox.setBackground(new Color(3, 45, 48));
-        comboBox.setForeground(Color.WHITE);
-        comboBox.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(comboBox);
+        // â”€â”€â”€ ID Type â”€â”€â”€
+        gbc.gridy = 2; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("ID Type"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
+        comboBox = UITheme.createStyledComboBox(new String[]{"Aadhar Card", "Voter Id", "Driving License"});
+        card.add(comboBox, gbc);
 
-        JLabel labelNumber = new JLabel("Number:");
-        labelNumber.setBounds(35, 111, 200, 14);
-        labelNumber.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelNumber.setForeground(Color.WHITE);
-        panel.add(labelNumber);
+        // â”€â”€â”€ Number â”€â”€â”€
+        gbc.gridy = 3; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Number"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
+        textFieldNumber = UITheme.createStyledTextField();
+        card.add(textFieldNumber, gbc);
 
-        textFieldNumber = new JTextField();
-        textFieldNumber.setBounds(271, 111, 150, 20);
-        panel.add(textFieldNumber);
+        // â”€â”€â”€ Name â”€â”€â”€
+        gbc.gridy = 4; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Patient Name"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
+        textName = UITheme.createStyledTextField();
+        card.add(textName, gbc);
 
-        JLabel labelName1 = new JLabel("Name:");
-        labelName1.setBounds(35, 151, 200, 14);
-        labelName1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelName1.setForeground(Color.WHITE);
-        panel.add(labelName1);
+        // â”€â”€â”€ Gender â”€â”€â”€
+        gbc.gridy = 5; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Gender"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
 
-        textName = new JTextField();
-        textName.setBounds(271, 151, 150, 20);
-        panel.add(textName);
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 12, 0));
+        genderPanel.setOpaque(false);
+        r1 = UITheme.createStyledRadioButton("Male");
+        r2 = UITheme.createStyledRadioButton("Female");
+        r3 = UITheme.createStyledRadioButton("Others");
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(r1); bg.add(r2); bg.add(r3);
+        r1.setSelected(true);
+        genderPanel.add(r1); genderPanel.add(r2); genderPanel.add(r3);
+        card.add(genderPanel, gbc);
 
-        JLabel labelGender = new JLabel("Gender:");
-        labelGender.setBounds(35, 191, 200, 14);
-        labelGender.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelGender.setForeground(Color.WHITE);
-        panel.add(labelGender);
+        // â”€â”€â”€ Disease â”€â”€â”€
+        gbc.gridy = 6; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Disease"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
+        textFieldDisease = UITheme.createStyledTextField();
+        card.add(textFieldDisease, gbc);
 
-        r1 = new JRadioButton("Male");
-        r1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        r1.setForeground(Color.WHITE);
-        r1.setBackground(new Color(204, 102, 102));
-        r1.setBounds(271, 191, 80, 15);
-        panel.add(r1);
+        // â”€â”€â”€ Room â”€â”€â”€
+        gbc.gridy = 7; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Room"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
 
-        r2 = new JRadioButton("Female");
-        r2.setFont(new Font("Tahoma", Font.BOLD, 14));
-        r2.setForeground(Color.WHITE);
-        r2.setBackground(new Color(204, 102, 102));
-        r2.setBounds(350, 191, 80, 15);
-        panel.add(r2);
-
-        r3 = new JRadioButton("Others");
-        r3.setFont(new Font("Tahoma", Font.BOLD, 14));
-        r3.setForeground(Color.WHITE);
-        r3.setBackground(new Color(204, 102, 102));
-        r3.setBounds(451, 191, 80, 15);
-        panel.add(r3);
-
-        JLabel labelDisease = new JLabel("Disease:");
-        labelDisease.setBounds(35, 231, 200, 14);
-        labelDisease.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelDisease.setForeground(Color.WHITE);
-        panel.add(labelDisease);
-
-        textFieldDisease = new JTextField();
-        textFieldDisease.setBounds(271, 231, 150, 20);
-        panel.add(textFieldDisease);
-
-        JLabel labelRoom = new JLabel("Room:");
-        labelRoom.setBounds(35, 274, 200, 14);
-        labelRoom.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelRoom.setForeground(Color.WHITE);
-        panel.add(labelRoom);
-
-        //room choice
-        c1 = new Choice();
+        // Load rooms from DB
+        java.util.ArrayList<String> rooms = new java.util.ArrayList<>();
         try {
             Conn c = new Conn();
             ResultSet resultset = c.statement.executeQuery("select * from Room");
             while (resultset.next()) {
-                c1.add(resultset.getString("Room_No"));
+                rooms.add(resultset.getString("Room_No"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        roomCombo = UITheme.createStyledComboBox(rooms.toArray(new String[0]));
+        card.add(roomCombo, gbc);
 
-        c1.setBounds(271, 274, 150, 20);
-        c1.setFont(new Font("Tahoma", Font.BOLD, 14));
-        c1.setForeground(Color.WHITE);
-        c1.setBackground(new Color(3, 45, 48));
-        panel.add(c1);
-
-
-        JLabel labelDate = new JLabel("Time:");
-        labelDate.setBounds(35, 316, 200, 14);
-        labelDate.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelDate.setForeground(Color.WHITE);
-        panel.add(labelDate);
-
+        // â”€â”€â”€ Time â”€â”€â”€
+        gbc.gridy = 8; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Admission Time"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
         Date date1 = new Date();
+        date = UITheme.createValueLabel("" + date1);
+        card.add(date, gbc);
 
-        date = new JLabel("" + date1);
-        date.setBounds(271, 316, 250, 14);
-        date.setForeground(Color.white);
-        date.setFont(new Font("Tahoma", Font.BOLD, 14));
-        panel.add(date);
+        // â”€â”€â”€ Deposit â”€â”€â”€
+        gbc.gridy = 9; gbc.gridx = 0;
+        gbc.insets = new Insets(5, 25, 5, 10);
+        gbc.weightx = 0.3;
+        card.add(UITheme.createFormLabel("Deposit (â‚¹)"), gbc);
+        gbc.gridx = 1;
+        gbc.insets = new Insets(5, 10, 5, 25);
+        gbc.weightx = 0.7;
+        textFieldDeposite = UITheme.createStyledTextField();
+        card.add(textFieldDeposite, gbc);
 
-        JLabel labelDeposit = new JLabel("Deposit:");
-        labelDeposit.setBounds(35, 359, 200, 17);
-        labelDeposit.setFont(new Font("Tahoma", Font.BOLD, 14));
-        labelDeposit.setForeground(Color.WHITE);
-        panel.add(labelDeposit);
+        // â”€â”€â”€ Buttons â”€â”€â”€
+        gbc.gridy = 10; gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        gbc.insets = new Insets(20, 25, 25, 25);
+        JPanel btnPanel = new JPanel(new GridLayout(1, 2, 15, 0));
+        btnPanel.setOpaque(false);
 
-        textFieldDeposite = new JTextField();
-        textFieldDeposite.setBounds(271, 359, 150, 20);
-        panel.add(textFieldDeposite);
-
-        b1 = new JButton("ADD");
-        b1.setBounds(100, 430, 120, 30);
-        b1.setForeground(Color.WHITE);
-        b1.setBackground(Color.black);
+        b1 = UITheme.createStyledButton("Register Patient", UITheme.ButtonType.SUCCESS);
         b1.addActionListener(this);
-        panel.add(b1);
+        btnPanel.add(b1);
 
-        b2 = new JButton("Back");
-        b2.setBounds(260, 430, 120, 30);
-        b2.setForeground(Color.WHITE);
-        b2.setBackground(Color.black);
+        b2 = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
         b2.addActionListener(this);
-        panel.add(b2);
+        btnPanel.add(b2);
 
-        setUndecorated(true);
-        setSize(850, 550);
-        setLayout(null);
-        setLocation(300, 250);
+        card.add(btnPanel, gbc);
+
+        bgPanel.add(card);
+
+        // â”€â”€â”€ Frame â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” New Patient", 660, 650);
         setVisible(true);
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (e.getSource() == b1) {
             Conn c = new Conn();
             String radioBTN = null;
@@ -202,44 +201,29 @@ public class NEW_PATIENT extends JFrame implements ActionListener {
             String s3 = textName.getText();
             String s4 = radioBTN;
             String s5 = textFieldDisease.getText();
-            String s6 = c1.getSelectedItem();
+            String s6 = (String) roomCombo.getSelectedItem();
             String s7 = date.getText();
             String s8 = textFieldDeposite.getText();
 
-
             try {
-                String q = "insert into patient_info values ('"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"')";
-                String q1 = "update Room set Availablity ='Occupied' where Room_No = "+s6;
+                String q = "insert into patient_info values ('" + s1 + "','" + s2 + "','" + s3 + "','" + s4 + "','" + s5 + "','" + s6 + "','" + s7 + "','" + s8 + "')";
+                String q1 = "update Room set Availablity ='Occupied' where Room_No = " + s6;
                 c.statement.executeUpdate(q);
                 c.statement.executeUpdate(q1);
-                JOptionPane.showMessageDialog(null, "Added Successfully");
+                UITheme.showSuccess(this, "Patient registered successfully!");
                 setVisible(false);
-
-
+                dispose();
             } catch (Exception E) {
                 E.printStackTrace();
-
             }
-
-
         } else {
             setVisible(false);
+            dispose();
         }
-
     }
-
 
     public static void main(String[] args) {
-        new NEW_PATIENT();
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(NEW_PATIENT::new);
     }
 }
-
-
-
-
-
-
-
-
-
-

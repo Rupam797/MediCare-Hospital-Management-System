@@ -1,97 +1,73 @@
 package hospital.management.system;
 
-import net.proteanit.sql.DbUtils;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.sql.ResultSet;
 
 public class Room extends JFrame {
 
-
     JTable table;
 
-    Room(){
-        JPanel panel=new JPanel();
-        panel.setBounds(5,5,890,590);
-        panel.setBackground(new Color(204,102,102));
-        panel.setLayout(null);
-        add(panel);
+    Room() {
+        // â”€â”€â”€ Background â”€â”€â”€
+        JPanel bgPanel = UITheme.createGradientPanel();
+        bgPanel.setLayout(new BorderLayout(0, 15));
+        bgPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        setContentPane(bgPanel);
 
+        // â”€â”€â”€ Header â”€â”€â”€
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setOpaque(false);
+        
+        JLabel titleLabel = UITheme.createTitleLabel("🛏️\uFE0F Room Management");
+        headerPanel.add(titleLabel, BorderLayout.WEST);
+        
+        bgPanel.add(headerPanel, BorderLayout.NORTH);
 
-        ImageIcon imageicon =new ImageIcon(ClassLoader.getSystemResource("icon/roomm.png"));
-        Image image =imageicon.getImage().getScaledInstance(200,200,Image.SCALE_DEFAULT);
-        ImageIcon imageIcon1= new ImageIcon(image);
-        JLabel label=new JLabel(imageIcon1);
-        label.setBounds(600,200,200,200);
-        panel.add(label);
+        // â”€â”€â”€ Main Card with Table â”€â”€â”€
+        JPanel card = UITheme.createCardPanel();
+        card.setLayout(new BorderLayout());
+        card.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        table=new JTable();
-        table.setBounds(10,40,500,400);
-        table.setBackground(new Color(204,102,102));
-        panel.add(table);
-
-        try{
-            Conn c=new Conn();
-            String q= "select * from Room";
-            ResultSet resultSet=c.statement.executeQuery(q);
-            table.setModel(DbUtils.resultSetToTableModel(resultSet));
-
-        }catch(Exception e){
+        table = new JTable();
+        
+        try {
+            Conn c = new Conn();
+            String q = "select * from Room";
+            ResultSet resultSet = c.statement.executeQuery(q);
+            table.setModel(UITheme.resultSetToTableModel(resultSet));
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        JLabel label1 =new JLabel("Room No");
-        label1.setBounds(12,15,80,15);
-        label.setFont(new Font("Tahoma",Font.BOLD,14));
-        panel.add(label1);
+        JScrollPane scrollPane = UITheme.createStyledTable(table);
+        card.add(scrollPane, BorderLayout.CENTER);
 
-        JLabel label2 =new JLabel("Availability");
-        label2.setBounds(140,15,80,15);
-        label2.setFont(new Font("Tahoma",Font.BOLD,14));
-        panel.add(label2);
+        bgPanel.add(card, BorderLayout.CENTER);
 
-        JLabel label3 =new JLabel("Price");
-        label3.setBounds(290,15,80,15);
-        label3.setFont(new Font("Tahoma",Font.BOLD,14));
-        panel.add(label3);
+        // â”€â”€â”€ Footer with Back Button â”€â”€â”€
+        JPanel footerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        footerPanel.setOpaque(false);
 
-        JLabel label4 =new JLabel("Bed Type");
-        label4.setBounds(400,15,80,15);
-        label4.setFont(new Font("Tahoma",Font.BOLD,14));
-        panel.add(label4);
-
-        JButton back =new JButton("BACK");
-        back.setBounds(200,500,120,30);
-        back.setBackground(Color.BLACK);
-        back.setForeground(Color.WHITE);
-        panel.add(back);
-        back.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-
-            }
+        JButton backBtn = UITheme.createStyledButton("Back", UITheme.ButtonType.OUTLINE);
+        backBtn.addActionListener(e -> {
+            setVisible(false);
+            dispose();
         });
+        footerPanel.add(backBtn);
 
+        bgPanel.add(footerPanel, BorderLayout.SOUTH);
 
-
-
-
-        setUndecorated(true);
-        setSize(900,600);
-        setLayout(null);
-        setLocation(300,230);
+        // â”€â”€â”€ Frame Setup â”€â”€â”€
+        UITheme.setupFrame(this, "MediCare HMS â€” Room Management", 900, 600);
         setVisible(true);
-
-
     }
-
 
     public static void main(String[] args) {
-        new Room();
+        UITheme.installTheme();
+        SwingUtilities.invokeLater(Room::new);
     }
-
 }
