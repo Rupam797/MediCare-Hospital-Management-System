@@ -12,12 +12,12 @@ public class Reception extends JFrame {
     Reception() {
         UITheme.installTheme();
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main layout ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Main layout ───
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(UITheme.BG_PRIMARY);
         setContentPane(mainPanel);
 
-        // ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â LEFT SIDEBAR ÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚ÂÃƒÂ¢Ã¢â‚¬Â¢Ã‚Â
+        // ═══════════════════ LEFT SIDEBAR ═══════════════════
         JPanel sidebar = new JPanel();
         sidebar.setBackground(UITheme.BG_SECONDARY);
         sidebar.setPreferredSize(new Dimension(250, 0));
@@ -198,7 +198,7 @@ public class Reception extends JFrame {
         cardsArea.add(Box.createVerticalStrut(15));
 
         // Fetch stats from DB
-        String patientCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", roomCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", deptCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â", ambCount = "ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â";
+        String patientCount = "—", roomCount = "—", deptCount = "—", ambCount = "—";
         try {
             Conn c = new Conn();
             ResultSet rs1 = c.statement.executeQuery("SELECT COUNT(*) FROM patient_info");
@@ -227,7 +227,7 @@ public class Reception extends JFrame {
         cardsArea.add(cardsGrid);
         cardsArea.add(Box.createVerticalStrut(30));
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Quick Actions ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Quick Actions ───
         JLabel actionsLabel = new JLabel("Quick Actions");
         actionsLabel.setFont(UITheme.subheadingFont());
         actionsLabel.setForeground(UITheme.TEXT_PRIMARY);
@@ -258,7 +258,7 @@ public class Reception extends JFrame {
         contentPanel.add(cardsArea, BorderLayout.CENTER);
         mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Frame setup ───
         UITheme.setupFrame(this, "MediCare HMS - Dashboard", 1100, 700);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

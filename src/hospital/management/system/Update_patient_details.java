@@ -11,12 +11,12 @@ public class Update_patient_details extends JFrame {
     JTextField textFieldRoom, textFieldINTime, textFieldAmount, textFieldPending;
 
     Update_patient_details() {
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Background ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Background ───
         JPanel bgPanel = UITheme.createGradientPanel();
         bgPanel.setLayout(new GridBagLayout());
         setContentPane(bgPanel);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main Card ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Main Card ───
         JPanel card = UITheme.createCardPanel();
         card.setLayout(new GridBagLayout());
         card.setPreferredSize(new Dimension(550, 500));
@@ -27,14 +27,14 @@ public class Update_patient_details extends JFrame {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Title ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Title ───
         gbc.gridy = 0;
         gbc.insets = new Insets(25, 25, 5, 25);
         JLabel titleLabel = UITheme.createTitleLabel("\u270F\uFE0F Update Patient Details");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         card.add(titleLabel, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Separator ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Separator ───
         gbc.gridy = 1;
         gbc.insets = new Insets(5, 25, 15, 25);
         card.add(UITheme.createSeparator(), gbc);
@@ -42,7 +42,7 @@ public class Update_patient_details extends JFrame {
         // 2-column layout
         gbc.gridwidth = 1;
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Name ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Name ───
         gbc.gridy = 2; gbc.gridx = 0;
         gbc.insets = new Insets(8, 25, 8, 10);
         gbc.weightx = 0.3;
@@ -65,7 +65,7 @@ public class Update_patient_details extends JFrame {
         choice = UITheme.createStyledComboBox(patients.toArray(new String[0]));
         card.add(choice, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Room Number ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Room Number ───
         gbc.gridy = 3; gbc.gridx = 0;
         gbc.insets = new Insets(8, 25, 8, 10);
         card.add(UITheme.createFormLabel("Room Number"), gbc);
@@ -75,7 +75,7 @@ public class Update_patient_details extends JFrame {
         textFieldRoom = UITheme.createStyledTextField();
         card.add(textFieldRoom, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ In Time ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── In Time ───
         gbc.gridy = 4; gbc.gridx = 0;
         gbc.insets = new Insets(8, 25, 8, 10);
         card.add(UITheme.createFormLabel("Admission Time"), gbc);
@@ -85,20 +85,20 @@ public class Update_patient_details extends JFrame {
         textFieldINTime = UITheme.createStyledTextField();
         card.add(textFieldINTime, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Amount Paid ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Amount Paid ───
         gbc.gridy = 5; gbc.gridx = 0;
         gbc.insets = new Insets(8, 25, 8, 10);
-        card.add(UITheme.createFormLabel("Amount Paid (ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹)"), gbc);
+        card.add(UITheme.createFormLabel("Amount Paid (₹)"), gbc);
         
         gbc.gridx = 1;
         gbc.insets = new Insets(8, 10, 8, 25);
         textFieldAmount = UITheme.createStyledTextField();
         card.add(textFieldAmount, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Pending ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Pending ───
         gbc.gridy = 6; gbc.gridx = 0;
         gbc.insets = new Insets(8, 25, 8, 10);
-        card.add(UITheme.createFormLabel("Pending Amount (ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¹)"), gbc);
+        card.add(UITheme.createFormLabel("Pending Amount (₹)"), gbc);
         
         gbc.gridx = 1;
         gbc.insets = new Insets(8, 10, 8, 25);
@@ -106,7 +106,7 @@ public class Update_patient_details extends JFrame {
         textFieldPending.setEditable(false);
         card.add(textFieldPending, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Buttons ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Buttons ───
         gbc.gridy = 7; gbc.gridx = 0;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(25, 25, 25, 25);
@@ -166,7 +166,7 @@ public class Update_patient_details extends JFrame {
         card.add(btnPanel, gbc);
         bgPanel.add(card);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame Setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Frame Setup ───
         UITheme.setupFrame(this, "MediCare HMS - Update Patient Details", 650, 600);
         setVisible(true);
     }

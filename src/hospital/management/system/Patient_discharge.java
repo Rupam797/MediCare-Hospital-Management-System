@@ -12,12 +12,12 @@ public class Patient_discharge extends JFrame {
     JLabel RNo, INTime, OUTime;
 
     Patient_discharge() {
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Background ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Background ───
         JPanel bgPanel = UITheme.createGradientPanel();
         bgPanel.setLayout(new GridBagLayout());
         setContentPane(bgPanel);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Main Card ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Main Card ───
         JPanel card = UITheme.createCardPanel();
         card.setLayout(new GridBagLayout());
         card.setPreferredSize(new Dimension(500, 450));
@@ -28,14 +28,14 @@ public class Patient_discharge extends JFrame {
         gbc.gridx = 0;
         gbc.gridwidth = 2;
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Title ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Title ───
         gbc.gridy = 0;
         gbc.insets = new Insets(25, 25, 5, 25);
         JLabel titleLabel = UITheme.createTitleLabel("Patient Discharge");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         card.add(titleLabel, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Separator ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Separator ───
         gbc.gridy = 1;
         gbc.insets = new Insets(5, 25, 15, 25);
         card.add(UITheme.createSeparator(), gbc);
@@ -43,7 +43,7 @@ public class Patient_discharge extends JFrame {
         // 2-column layout
         gbc.gridwidth = 1;
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Patient ID ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Patient ID ───
         gbc.gridy = 2; gbc.gridx = 0;
         gbc.insets = new Insets(10, 25, 10, 10);
         gbc.weightx = 0.4;
@@ -66,27 +66,27 @@ public class Patient_discharge extends JFrame {
         choice = UITheme.createStyledComboBox(patients.toArray(new String[0]));
         card.add(choice, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Room Number ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Room Number ───
         gbc.gridy = 3; gbc.gridx = 0;
         gbc.insets = new Insets(10, 25, 10, 10);
         card.add(UITheme.createFormLabel("Room Number"), gbc);
         
         gbc.gridx = 1;
         gbc.insets = new Insets(10, 10, 10, 25);
-        RNo = UITheme.createValueLabel("ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â");
+        RNo = UITheme.createValueLabel("—");
         card.add(RNo, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ In Time ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── In Time ───
         gbc.gridy = 4; gbc.gridx = 0;
         gbc.insets = new Insets(10, 25, 10, 10);
         card.add(UITheme.createFormLabel("Admission Time"), gbc);
         
         gbc.gridx = 1;
         gbc.insets = new Insets(10, 10, 10, 25);
-        INTime = UITheme.createValueLabel("ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â");
+        INTime = UITheme.createValueLabel("—");
         card.add(INTime, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Out Time ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Out Time ───
         gbc.gridy = 5; gbc.gridx = 0;
         gbc.insets = new Insets(10, 25, 10, 10);
         card.add(UITheme.createFormLabel("Discharge Time"), gbc);
@@ -97,7 +97,7 @@ public class Patient_discharge extends JFrame {
         OUTime = UITheme.createValueLabel("" + date);
         card.add(OUTime, gbc);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Buttons ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Buttons ───
         gbc.gridy = 6; gbc.gridx = 0;
         gbc.gridwidth = 2;
         gbc.insets = new Insets(25, 25, 25, 25);
@@ -145,7 +145,7 @@ public class Patient_discharge extends JFrame {
         card.add(btnPanel, gbc);
         bgPanel.add(card);
 
-        // ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Frame Setup ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬
+        // ─── Frame Setup ───
         UITheme.setupFrame(this, "MediCare HMS - Patient Discharge", 600, 550);
         setVisible(true);
     }
