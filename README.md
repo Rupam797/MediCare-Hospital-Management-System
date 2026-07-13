@@ -17,6 +17,12 @@ MediCare is a state-of-the-art desktop-based **Hospital Management System (HMS)*
 -   **🏢 Department Directories**: View hospital departments and contact details (`Department.java`).
 
 ---
+## 🏥Screenshot
+**Login Page**
+<img width="721" height="710" alt="Screenshot 2026-07-13 160035" src="https://github.com/user-attachments/assets/ebf21e99-cb2a-4364-aee3-b697d7305f6b" />
+
+**Dashboard**
+<img width="1918" height="1013" alt="Screenshot 2026-07-13 160104" src="https://github.com/user-attachments/assets/f01b82b7-28e9-47ed-8528-46522ea479cb" />
 
 ## 🎨 Design System & UI Aesthetics
 
